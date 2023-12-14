@@ -35,8 +35,19 @@ public class PetService
         String responseBody = response.body();
         ObjectMapper objectMapper = new ObjectMapper();
         List<Pet> petList = objectMapper.readValue(responseBody, new TypeReference<List<Pet>>() {});
+        if (petList.isEmpty())
+        {
+            System.out.println("Não existem pets cadastrados!");
+        } else
+        {
+            mostrarPetsAbrigo(petList);
+        }
+    }
+
+    public void mostrarPetsAbrigo(List<Pet> pets)
+    {
         System.out.println("Pets cadastrados:");
-        for (Pet pet : petList)
+        for (Pet pet : pets)
         {
             long id = pet.getId();
             String tipo = pet.getTipo();
